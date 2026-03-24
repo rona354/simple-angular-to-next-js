@@ -1,21 +1,35 @@
 import { ItemCard } from '@/components/item-card';
+import { formatDate } from '@/lib/utils';
 
 /**
  * 💡 ANGULAR TO NEXT.JS MAPPING:
  * 
- * Angular: app.component.ts (Root Component) + routing
- * Next.js: app/page.tsx (Route Segment Component)
+ * THE ROOT COMPONENT (Route Segment Component)
  * 
- * In Next.js App Router, 'page.tsx' is the default file that renders
- * for a specific route (in this case, the root '/').
+ * Next.js App Router: app/page.tsx
+ * Angular: app.component.ts (or the component registered for the path '/')
  * 
- * By default, this is a "Server Component". It runs on the server, 
- * cannot use browser APIs or state (like useState/ngOnInit), but sends 
- * ZERO JavaScript to the browser.
+ * LIFECYCLE HOOKS:
+ * In Angular: 
+ *   export class HomeComponent implements OnInit {
+ *     ngOnInit() {
+ *       // Logic to fetch data or initialize component state
+ *     }
+ *   }
+ * 
+ * In Next.js Server Components:
+ *   There are NO lifecycle hooks like 'ngOnInit' or 'ngOnChanges'.
+ *   The component is simply a function that is executed ONCE on the server.
+ *   If you need to fetch data, you just do it inside the function body 
+ *   (or make it 'async' and 'await' a database call).
+ * 
+ *   For client-side lifecycle (like ngOnInit in the browser), 
+ *   you would use the 'useEffect' hook in a 'use client' component.
  */
-
 export default function Home() {
   // Simulating data you might define as class properties in Angular
+  const today = formatDate(new Date());
+
   const frameworkFeatures = [
     { 
       id: 1, 
@@ -57,6 +71,10 @@ export default function Home() {
           <p className="text-lg text-gray-500 mt-2">
             Phase 1: Components, Inputs (Props), and Control Flow
           </p>
+          <div className="mt-4 text-sm font-medium text-blue-600 bg-blue-50 inline-block px-3 py-1 rounded-full">
+            {/* Using our 'formatDate' utility instead of Angular's DatePipe */}
+            Updated: {today}
+          </div>
         </header>
 
         <section>

@@ -3,57 +3,49 @@ import Link from 'next/link';
 /**
  * 💡 ANGULAR TO NEXT.JS MAPPING:
  * 
- * ROUTING:
- * In Angular, you define routes in 'app-routing.module.ts':
- * { path: 'features', component: FeaturesComponent }
+ * THE FEATURES INDEX PAGE:
+ * Route: /features
  * 
- * In Next.js App Router, the folder name IS the route. 
- * 'app/features/page.tsx' -> renders at '/features'
+ * This is a standard page component. Because it's inside the 'features' 
+ * folder, it automatically gets wrapped by 'app/features/layout.tsx'.
  */
-
 export default function FeaturesPage() {
   const nextFeatures = [
-    { id: 'routing', name: 'File-based Routing', desc: 'Folder structure determines your URL.' },
-    { id: 'layouts', name: 'Nested Layouts', desc: 'Each folder can have its own layout.tsx.' },
-    { id: 'navigation', name: 'Optimized Navigation', desc: 'The <Link> component pre-fetches pages for instant navigation.' },
+    { id: 'routing', title: 'File-based Routing', desc: 'No more long AppRoutingModule files. Folders are routes.' },
+    { id: 'streaming', title: 'Streaming with Suspense', desc: 'Instantly send parts of the page before others are ready.' },
+    { id: 'optimization', title: 'Image/Font Optimization', desc: 'Built-in handling for assets without complex plugins.' },
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-12">
-      <header className="mb-10">
-        {/* 
-          💡 ANGULAR TO NEXT.JS MAPPING:
-          Angular: <a routerLink="/">Back</a>
-          Next.js: <Link href="/">Back</Link>
-          
-          <Link> is highly optimized. It doesn't do a full browser reload.
-        */}
-        <Link 
-          href="/" 
-          className="text-blue-600 hover:underline mb-4 inline-block font-medium"
-        >
-          ← Back to Overview
-        </Link>
-        <h1 className="text-3xl font-bold text-gray-900 mt-2">Next.js Routing Features</h1>
+    <div>
+      <header className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900">Next.js Core Features</h1>
+        <p className="text-gray-500 mt-2 italic text-lg">
+          Explore the routing and navigation concepts.
+        </p>
       </header>
 
-      <ul className="grid gap-6">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {nextFeatures.map((f) => (
-          <li key={f.id} className="border p-6 rounded-xl hover:bg-gray-50 transition-colors">
+          <div key={f.id} className="border border-gray-100 p-6 rounded-xl bg-gray-50 hover:border-blue-200 transition-all">
+            <h2 className="font-bold text-gray-800 text-lg mb-2">{f.title}</h2>
+            <p className="text-sm text-gray-600 mb-6 min-h-[40px] leading-relaxed">{f.desc}</p>
+            
             {/* 
-              Dynamic Link: 
+              💡 ANGULAR TO NEXT.JS MAPPING:
               Angular: [routerLink]="['/features', f.id]"
               Next.js: href={`/features/${f.id}`}
             */}
-            <Link href={`/features/${f.id}`} className="group">
-              <h2 className="text-xl font-bold text-gray-800 group-hover:text-blue-600">
-                {f.name} →
-              </h2>
-              <p className="text-gray-600 mt-2">{f.desc}</p>
+            <Link 
+              href={`/features/${f.id}`}
+              className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800"
+            >
+              Learn More 
+              <span className="ml-1">→</span>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
