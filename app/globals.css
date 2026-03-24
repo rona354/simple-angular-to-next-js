@@ -1,5 +1,21 @@
+/**
+ * 💡 ANGULAR TO NEXT.JS MAPPING:
+ * 
+ * GLOBAL STYLESHEET:
+ * This file is exactly like 'src/styles.css' (or styles.scss) in an Angular CLI project.
+ * 
+ * In Angular, you register it in the "styles" array within 'angular.json'.
+ * In Next.js, you simply import it in the 'app/layout.tsx' file.
+ * 
+ * It applies styles to every page in your application.
+ */
+
 @import "tailwindcss";
 
+/* 
+  Global CSS Variables (Custom Properties)
+  Think of these as your global theme constants.
+*/
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -19,6 +35,10 @@
   }
 }
 
+/* 
+  Base Styles: 
+  Equivalent to putting styles directly in the 'body' selector in Angular.
+*/
 body {
   background: var(--background);
   color: var(--foreground);
